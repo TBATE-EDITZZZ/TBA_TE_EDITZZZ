@@ -1,0 +1,255 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#030005"><meta name="description" content="TBA_TE_EDITZZZ — create, edit, inspire."><title>TBA_TE_EDITZZZ | OFFICIAL</title>
+<style>
+:root{color-scheme:dark;--violet:#bb7aff;--white:#f8f5ff;--muted:#a9a1b7}
+*{box-sizing:border-box}html{scroll-behavior:smooth}
+[hidden]{display:none!important}
+body{margin:0;background:#030005;color:var(--white);font-family:system-ui,-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;overflow-x:hidden}
+a{color:inherit;text-decoration:none}button{font:inherit}
+a:focus-visible,button:focus-visible,select:focus-visible,input:focus-visible{outline:2px solid #e4baff;outline-offset:5px}
+
+/* Intro */
+.intro{position:fixed;inset:0;z-index:100;background:#000;display:grid;place-items:center;overflow:hidden;transition:opacity .7s cubic-bezier(.2,.7,.2,1),transform .7s cubic-bezier(.2,.7,.2,1)}
+.intro.out{opacity:0;transform:scale(1.06);pointer-events:none}
+.intro-inner{text-align:center;position:relative;padding:1.5rem}
+.intro-line{height:2px;position:absolute;left:-20vw;right:-20vw;top:30%;background:linear-gradient(90deg,transparent,#a94cff,#ead2ff,#a94cff,transparent);box-shadow:0 0 12px #c074ff,0 0 42px #9823ff;animation:line 1.2s cubic-bezier(.2,.7,.2,1) both}
+.intro-title{font-size:clamp(1.8rem,7vw,5rem);letter-spacing:.08em;font-weight:850;margin:0;background:linear-gradient(110deg,#b67af0 15%,#fff 40%,#c58cff 52%,#b67af0 75%);background-size:250% 100%;color:transparent;background-clip:text;-webkit-background-clip:text;animation:enterLeft .8s .25s both,sweep 1.7s .7s both}
+.intro-sub{font-size:.68rem;letter-spacing:.4em;color:#cba4ed;margin:1rem 0 0;animation:enterUp .7s .8s both}
+.skip{position:absolute;right:1.3rem;bottom:1.4rem;border:1px solid #765298;border-radius:100px;background:#140b1a;color:#eee;padding:.65rem 1rem;font-size:.7rem;letter-spacing:.1em;cursor:pointer}
+.intro-particles,.stars{position:absolute;inset:0;pointer-events:none;background-image:radial-gradient(2px 2px at 14% 26%,#a947ff 50%,transparent),radial-gradient(2px 2px at 78% 38%,#d1a0ff 50%,transparent),radial-gradient(1px 1px at 33% 78%,#c081ff 50%,transparent),radial-gradient(2px 2px at 87% 75%,#a66bff 50%,transparent),radial-gradient(1px 1px at 60% 20%,#fff 50%,transparent);background-size:310px 320px;opacity:.55;animation:float 14s ease-in-out infinite alternate}
+.stars{position:fixed;opacity:.35;will-change:transform}
+
+/* Background */
+.site{position:relative}
+.ambient{position:fixed;inset:0;pointer-events:none;overflow:hidden;z-index:-1;background:radial-gradient(ellipse at 78% 25%,#54108a70,transparent 38%),radial-gradient(ellipse at 12% 82%,#36125d80,transparent 42%),#030005}
+.ambient:before{content:'';position:absolute;inset:-30%;background:radial-gradient(ellipse at 55% 45%,#a747ff16,transparent 40%);animation:aurora 16s ease-in-out infinite alternate;will-change:transform}
+.ambient:after{content:'';position:absolute;inset:0;background:repeating-linear-gradient(165deg,transparent 0 74px,#c076ff08 75px 76px,transparent 77px 150px),linear-gradient(transparent 97%,#b56aff0a 100%);background-size:auto,100% 5px}
+.cursor{position:fixed;pointer-events:none;z-index:99;width:260px;height:260px;border-radius:50%;background:radial-gradient(circle,#aa55ff14,transparent 70%);transform:translate(-50%,-50%);display:none}
+@media (hover:hover) and (pointer:fine){.cursor{display:block}}
+
+/* Nav */
+.nav{position:absolute;top:0;left:0;right:0;z-index:3;display:flex;align-items:center;justify-content:space-between;padding:1.5rem clamp(1.2rem,6vw,6rem);border-bottom:1px solid #c778ff26;background:linear-gradient(180deg,#10041de8,transparent)}
+.brand{font-weight:850;font-size:.87rem;font-style:italic;letter-spacing:.12em;text-shadow:0 0 18px #b157ff88}
+.brand span{color:#bb7aff}
+.nav-link,.tool-button,.top-button{appearance:none;font-size:.65rem;letter-spacing:.12em;color:#eee0ff;border:1px solid #a765db70;border-radius:3px;padding:.8rem 1rem;cursor:pointer;font-weight:700;clip-path:polygon(0 0,calc(100% - 10px) 0,100% 10px,100% 100%,10px 100%,0 calc(100% - 10px));transition:background .25s,border-color .25s,transform .25s}
+.nav-link{background:none;color:#dfcee9;border-color:#7f4baa80}
+.tool-button,.top-button{background:#241234aa}
+.nav-link:hover{background:#a846ff25;border-color:#bb7aff}
+.tool-button:hover,.top-button:hover{background:#552576;transform:translateY(-2px)}
+.tool-button:active,.top-button:active{transform:scale(.97)}
+.nav-link:focus-visible,.tool-button:focus-visible,.top-button:focus-visible{clip-path:none;outline-offset:4px}
+
+/* Hero */
+.hero{min-height:100svh;display:flex;align-items:center;padding:7rem clamp(1.2rem,9vw,9rem) 6rem;position:relative}
+.hero:before{content:'CREATOR // 01';position:absolute;top:23%;right:clamp(1rem,7vw,7rem);color:#c592ed80;font-weight:800;font-style:italic;font-size:.65rem;letter-spacing:.25em;writing-mode:vertical-rl}
+.hero-content{max-width:900px;position:relative;z-index:1}
+.eyebrow,.section-kicker,.card-label{font-size:.68rem;font-weight:850;font-style:italic;letter-spacing:.22em;color:#c594f7;text-transform:uppercase}
+.eyebrow:before,.section-kicker:before{content:'';display:inline-block;width:30px;height:1px;background:#b85dff;vertical-align:middle;margin-right:12px;box-shadow:0 0 10px #a343ff}
+.hero h1{font-size:clamp(3.15rem,9vw,8rem);line-height:.94;letter-spacing:-.055em;margin:1.3rem 0;text-transform:uppercase;font-style:italic;font-weight:900;text-shadow:3px 3px 0 #421568,0 0 35px #a44aff55;animation:enterLeft .9s .2s both}
+.hero h1 em{font-style:italic;background:linear-gradient(110deg,#a75cff 5%,#f2dcff 40%,#af66ff 70%);background-size:220% 100%;color:transparent;background-clip:text;-webkit-background-clip:text;text-shadow:none;filter:drop-shadow(0 0 22px #b75dff66);animation:title-light 7s ease-in-out infinite}
+.hero-content img{border-radius:12px!important;border:2px solid #e2b6ff!important;outline:1px solid #ae61ec55;outline-offset:5px;box-shadow:0 0 0 5px #b66dff18,0 0 30px #a343ff77!important;animation:portrait-glow 5s ease-in-out infinite}
+.creator{font-size:clamp(1rem,2.4vw,1.5rem);font-weight:750;font-style:italic;letter-spacing:.2em;margin:2rem 0 .65rem;animation:enterUp .9s .4s both}
+.hero-sub{font-size:clamp(.7rem,1.4vw,.85rem);letter-spacing:.2em;color:var(--muted);animation:enterUp .9s .55s both}
+.creator-tools{display:flex;gap:.6rem;flex-wrap:wrap;margin-top:2rem}
+.share-status{min-height:1.3em;color:#d1b8e6;font-size:.76rem}
+.scroll{position:absolute;bottom:2rem;left:clamp(1.2rem,9vw,9rem);display:flex;gap:.8rem;align-items:center;color:#a89ab8;font-size:.6rem;letter-spacing:.22em}
+.scroll:before{content:'↓';display:grid;place-items:center;width:32px;height:40px;border:1px solid #9a62c9;border-radius:20px;color:#e1bdff;box-shadow:inset 0 0 12px #a05aff22;animation:breathe 2s infinite}
+.orbit{position:absolute;right:8%;top:23%;width:min(36vw,440px);aspect-ratio:1;border:1px solid #c574ff70;border-radius:50%;box-shadow:inset 0 0 60px #9a3bff23,0 0 60px #b64fff25;pointer-events:none;animation:orbit-breathe 8s ease-in-out infinite}
+.orbit:before,.orbit:after{content:'';position:absolute;inset:12%;border:1px solid #bd80fb25;border-radius:50%}
+.orbit:before{border-style:dashed;animation:orbit-turn 28s linear infinite}
+.orbit:after{inset:28%;background:radial-gradient(circle,#aa4bff29,transparent 70%);border-color:#e0a5ff30;animation:orbit-breathe 6s ease-in-out infinite alternate}
+
+/* Connect */
+.connect{padding:7rem clamp(1.2rem,9vw,9rem) 8rem;max-width:1500px;margin:auto}
+.connect h2{font-size:clamp(2.3rem,5vw,5rem);letter-spacing:-.05em;line-height:1;margin:1rem 0;font-style:italic;text-transform:uppercase;font-weight:900;text-shadow:2px 2px 0 #51246e}
+.lead{color:var(--muted);line-height:1.7;max-width:32rem;margin-bottom:3rem}
+.cards{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:1.1rem}
+.card{position:relative;overflow:hidden;isolation:isolate;min-height:300px;padding:clamp(1.5rem,3vw,2.7rem);display:flex;flex-direction:column;align-items:flex-start;border:1px solid #c47aff77;border-radius:4px;background:linear-gradient(145deg,#341348dd,#100b18ed 60%,#09070df2);box-shadow:0 20px 60px #0008;backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);clip-path:polygon(0 0,calc(100% - 30px) 0,100% 30px,100% 100%,30px 100%,0 calc(100% - 30px))}
+.card:before{content:'';position:absolute;inset:0;z-index:-1;background:radial-gradient(400px circle at var(--light-x,80%) var(--light-y,10%),#dfb4ff20,transparent 60%),linear-gradient(135deg,#ffffff0d,transparent 40%);pointer-events:none}
+.card:after{content:'';position:absolute;width:220px;height:220px;right:-90px;top:-100px;border-radius:50%;background:#8d3bff;filter:blur(90px);opacity:.35;pointer-events:none}
+.icon{width:52px;height:52px;display:grid;place-items:center;border-radius:3px;transform:skew(-5deg);background:#a64aff21;color:#dfb8ff;border:1px solid #d39cff3b;box-shadow:inset 0 1px 0 #ffffff26,0 10px 30px #0004}
+.icon svg{width:27px;height:27px;fill:currentColor}
+.card-label{margin:2rem 0 .55rem;font-size:.66rem;letter-spacing:.2em;color:#be9bd5}
+.card-label:before{content:'✦ ';color:#e7c6ff}
+.card h3{font-size:clamp(1.25rem,2.2vw,1.8rem);letter-spacing:-.025em;margin:0 0 .6rem;font-style:italic;font-weight:900}
+.handle{color:#a79bb3;font-size:.85rem;margin:0 0 1.8rem}
+.cta{position:relative;overflow:hidden;margin-top:auto;display:inline-flex;gap:1.2rem;align-items:center;padding:.85rem 1.2rem;border-radius:3px;background:linear-gradient(110deg,#8128e8,#ba6dff);font-size:.72rem;letter-spacing:.13em;font-weight:800;transform:skew(-5deg);box-shadow:4px 4px 0 #4f167c,0 0 25px #922cff45;transition:transform .25s,box-shadow .25s}
+.cta:before{content:'';position:absolute;inset:-100% auto -100% -70%;width:30%;background:#fff5;transform:rotate(25deg);animation:button-shine 7s ease-in-out infinite}
+.card:nth-child(2) .cta:before{animation-delay:1.5s}
+.cta:hover{transform:skew(-5deg) translateY(-2px);box-shadow:4px 4px 0 #4f167c,0 0 35px #a952ff80}
+.cta:active{transform:skew(-5deg) scale(.97)}
+
+/* Reveal (card hover fixed: it now beats .reveal.visible) */
+.reveal{opacity:0;transform:translateY(30px);transition:opacity .8s cubic-bezier(.2,.7,.2,1),transform .8s cubic-bezier(.2,.7,.2,1)}
+.reveal.left{transform:translateX(-35px)}.reveal.right{transform:translateX(35px)}
+.reveal.visible{opacity:1;transform:none}
+.card.reveal{transition:opacity .8s cubic-bezier(.2,.7,.2,1),transform .35s cubic-bezier(.2,.7,.2,1),border-color .35s,box-shadow .35s}
+.card.reveal.visible:hover{transform:translateY(-6px);border-color:#c68cff9c;box-shadow:0 20px 60px #6d16b72b}
+
+/* Details + quote */
+.creator-details{padding:0 clamp(1.2rem,9vw,9rem) 6rem;max-width:1500px;margin:auto}
+.creator-details h2{font-size:clamp(2rem,4vw,3.5rem);font-style:italic;letter-spacing:-.04em}
+.detail-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem}
+.detail-item{border-top:1px solid #b775e977;padding:1.4rem 0;color:#b9acc5;line-height:1.6}
+.detail-item strong{display:block;color:#f1e4ff;font-size:1rem;margin-bottom:.4rem;letter-spacing:.03em;font-style:italic}
+.detail-item span{display:block;color:#ba79ea;font-size:.7rem;letter-spacing:.15em;margin-bottom:.8rem}
+.daily-quote{margin:0 clamp(1.2rem,9vw,9rem) 7rem;padding:clamp(1.5rem,4vw,3.5rem);position:relative;overflow:hidden;border:1px solid #b977ef6b;background:linear-gradient(125deg,#2f1046cc,#090510ee 70%);clip-path:polygon(0 0,calc(100% - 28px) 0,100% 28px,100% 100%,28px 100%,0 calc(100% - 28px))}
+.daily-quote:before{content:'✦';position:absolute;right:5%;top:-20%;font-size:clamp(8rem,22vw,19rem);color:#c175ff0c;pointer-events:none}
+.daily-quote blockquote{position:relative;max-width:750px;margin:1.5rem 0;font-size:clamp(1.5rem,4vw,3.5rem);line-height:1.18;font-weight:850;font-style:italic;letter-spacing:-.035em;color:#f6ecff;text-shadow:0 0 30px #b25cff55}
+.quote-note{position:relative;color:#c49bdb;font-size:.7rem;letter-spacing:.18em;text-transform:uppercase}
+.quote-character{width:74px;height:74px;object-fit:cover;object-position:center 35%;border-radius:8px;border:1px solid #d797ff;box-shadow:0 0 24px #b65cff55;position:relative;float:right;margin:0 0 1rem 1rem}
+footer{border-top:1px solid #ffffff18;display:flex;justify-content:space-between;gap:1rem;padding:2rem clamp(1.2rem,9vw,9rem);color:#887d93;font-size:.7rem;letter-spacing:.1em}
+footer strong{color:#d9c2ed;font-style:italic}
+.top-button{position:fixed;right:1.2rem;bottom:1.2rem;z-index:5;box-shadow:0 4px 25px #0008}
+
+/* Chat */
+.chat-launch{position:fixed;left:1rem;bottom:1rem;z-index:10;border:1px solid #c181ff;background:linear-gradient(120deg,#7728d1,#b85dff);color:#fff;padding:.85rem 1rem;font-weight:800;border-radius:10px;box-shadow:0 0 25px #a34cff55;cursor:pointer}
+.chat-panel{position:fixed;inset:0;z-index:20;width:100%;height:100dvh;display:flex;flex-direction:column;background:radial-gradient(ellipse at 80% 0%,#45166799,transparent 48%),radial-gradient(ellipse at 10% 90%,#28134c99,transparent 45%),#06030a;animation:chat-arrive .5s cubic-bezier(.2,.7,.2,1) both}
+.chat-panel:before{content:'';position:absolute;inset:0;pointer-events:none;background:repeating-linear-gradient(165deg,transparent 0 90px,#c076ff08 91px 92px,transparent 93px 180px);animation:chat-rays 14s ease-in-out infinite alternate}
+.chat-panel>*{position:relative}
+.chat-header,.chat-settings,.chat-messages,.chat-form,.chat-note{width:min(100%,850px);margin-left:auto;margin-right:auto}
+.chat-header{display:flex;align-items:center;justify-content:space-between;gap:1rem;padding:1.25rem clamp(1rem,4vw,2rem);border-bottom:1px solid #c886ff40}
+.chat-header strong{font-style:italic;font-size:clamp(1.1rem,3vw,1.6rem);letter-spacing:.1em;text-shadow:0 0 20px #bc76ff}
+.chat-header-actions{display:flex;align-items:center;gap:.65rem}
+.chat-close{width:44px;height:44px;background:none;border:1px solid #bb7aff70;border-radius:8px;color:#fff;font-size:1.4rem;cursor:pointer;transition:background .2s,transform .2s}
+.chat-close:hover{background:#aa66ff33;transform:rotate(90deg)}
+.chat-settings{display:flex;align-items:center;gap:.7rem;padding:1rem clamp(1rem,4vw,2rem);font-size:.75rem;color:#d2bddf}
+.chat-settings select,.chat-form input{background:#251136;color:#fff;border:1px solid #b878ed;border-radius:7px;padding:.65rem;font:inherit}
+.chat-messages{flex:1;overflow:auto;padding:1rem clamp(1rem,4vw,2rem);display:flex;flex-direction:column;gap:.65rem;scroll-behavior:smooth}
+.chat-message{max-width:90%;padding:.7rem .85rem;border-radius:10px;background:#33203f;line-height:1.5;font-size:.85rem;white-space:pre-wrap;overflow-wrap:anywhere;border:1px solid #c28bff26;box-shadow:inset 0 1px #ffffff16,0 8px 30px #0005;animation:message-enter .45s cubic-bezier(.2,.7,.2,1) both}
+.chat-message.user{align-self:flex-end;background:linear-gradient(120deg,#592184,#7b32ba)}
+.chat-thinking{color:#d6b5ed}
+.chat-thinking:after{content:' • • •';display:inline-block;animation:thinking 1.2s ease-in-out infinite}
+.quick-prompts{display:flex;gap:.5rem;overflow-x:auto;padding:.2rem clamp(1rem,4vw,2rem) .8rem;width:min(100%,850px);margin:auto;scrollbar-width:thin}
+.quick-prompts button,.clear-chat{flex:none;background:#291637;border:1px solid #a975cf77;color:#e8d9f5;padding:.65rem .8rem;border-radius:8px;font-size:.72rem;cursor:pointer}
+.quick-prompts button:hover,.clear-chat:hover{background:#552576}
+.chat-form{display:flex;gap:.5rem;padding:1rem clamp(1rem,4vw,2rem)}
+.chat-form input{flex:1;min-width:0;padding:1rem;border-color:#a468d7}
+.chat-form button{background:linear-gradient(120deg,#7728d1,#b65cfa);color:#fff;border:0;border-radius:7px;padding:.7rem 1rem;cursor:pointer;font-weight:700;transition:transform .2s,box-shadow .2s}
+.chat-form button:hover{box-shadow:0 0 24px #b256ff88}
+.chat-form button:active{transform:scale(.96)}
+.chat-form button:disabled{opacity:.5}
+.chat-note{padding:0 clamp(1rem,4vw,2rem) max(.8rem,env(safe-area-inset-bottom));margin-top:0;margin-bottom:0;color:#bca8c8;font-size:.68rem}
+
+@media(max-width:650px){.cards,.detail-grid{grid-template-columns:1fr}.hero:before{top:18%;right:1rem}.hero h1{font-size:clamp(3rem,13.2vw,5rem)}.orbit{width:65vw;right:-25%;top:25%}.connect{padding-top:5rem}.card{min-height:280px}footer{flex-direction:column}.intro-title{font-size:clamp(1.4rem,7vw,2.3rem)}.creator-details{padding-bottom:4rem}.detail-item{padding:1rem 0}}
+
+@keyframes line{from{transform:translateX(-100%);opacity:0}to{transform:none;opacity:1}}
+@keyframes enterLeft{from{opacity:0;transform:translateX(-35px);filter:blur(8px)}to{opacity:1;transform:none;filter:blur(0)}}
+@keyframes enterUp{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:none}}
+@keyframes sweep{from{background-position:100% 0}to{background-position:0 0}}
+@keyframes float{from{transform:translateY(-8px)}to{transform:translateY(14px)}}
+@keyframes breathe{50%{box-shadow:0 0 16px #a449ff80;transform:translateY(4px)}}
+@keyframes aurora{from{transform:translate3d(-3%,-2%,0) scale(1)}to{transform:translate3d(5%,4%,0) scale(1.1)}}
+@keyframes orbit-turn{to{transform:rotate(360deg)}}
+@keyframes orbit-breathe{0%,100%{opacity:.65;transform:scale(.98)}50%{opacity:1;transform:scale(1.03)}}
+@keyframes portrait-glow{0%,100%{filter:brightness(1)}50%{filter:brightness(1.15)}}
+@keyframes title-light{0%,100%{background-position:100% 0}50%{background-position:0 0}}
+@keyframes button-shine{0%,60%,100%{left:-70%}80%{left:140%}}
+@keyframes chat-arrive{from{opacity:0;transform:scale(1.035)}to{opacity:1;transform:none}}
+@keyframes message-enter{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}
+@keyframes chat-rays{from{transform:translateX(-1%)}to{transform:translateX(1%)}}
+@keyframes thinking{0%,100%{opacity:.3}50%{opacity:1}}
+
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*,*:before,*:after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}.reveal,.reveal.left,.reveal.right{opacity:1;transform:none}.intro{display:none}.stars{animation:none}.ambient:before,.orbit,.orbit:before,.orbit:after,.hero-content img,.hero h1 em,.cta:before,.chat-panel,.chat-panel:before,.chat-message,.chat-thinking:after{animation:none!important}.hero h1 em{background:none;color:#bc7cff;filter:none}.chat-messages{scroll-behavior:auto}}
+</style>
+</head>
+<body>
+<div class="intro" id="intro" aria-label="Introduction"><div class="intro-particles"></div><div class="intro-inner"><div class="intro-line"></div><h2 class="intro-title">TBA_TE_EDITZZZ</h2><p class="intro-sub">CREATE • EDIT • INSPIRE</p></div><button class="skip" id="skip" type="button">SKIP INTRO ↗</button></div>
+<div class="ambient"></div><div class="stars" id="stars"></div><div class="cursor" id="cursor"></div>
+<button class="top-button" id="back-to-top" type="button" aria-label="Back to top" hidden>↑ TOP</button>
+<button class="chat-launch" id="chat-open" type="button" aria-expanded="false" aria-controls="chat-panel">✦ AI CHAT</button>
+<section class="chat-panel" id="chat-panel" aria-label="AI chat assistant" hidden>
+<div class="chat-header"><strong>✦ CREATOR AI</strong><div class="chat-header-actions"><button class="clear-chat" id="clear-chat" type="button">CLEAR CHAT</button><button class="chat-close" id="chat-close" type="button" aria-label="Close chat">×</button></div></div>
+<div class="chat-settings"><label for="chat-model">Assistant</label><select id="chat-model"><option value="openai">ChatGPT</option><option value="anthropic">Claude</option></select></div>
+<div class="chat-messages" id="chat-messages" role="log" aria-live="polite"><div class="chat-message">Hi! Ask me a question. Choose ChatGPT or Claude above.</div></div>
+<div class="quick-prompts" aria-label="Suggested questions"><button type="button" data-prompt="Give me ideas for a creative video edit.">✦ Video ideas</button><button type="button" data-prompt="Suggest a catchy caption for an edit.">✦ Caption ideas</button><button type="button" data-prompt="How can I improve the pacing of a short video?">✦ Editing tips</button></div>
+<form class="chat-form" id="chat-form"><input id="chat-input" aria-label="Your message" placeholder="Type a message…" maxlength="2000" required autocomplete="off"><button type="submit">SEND ↗</button></form>
+<p class="chat-note">AI can make mistakes. Don’t share sensitive information.</p>
+</section>
+<div class="site">
+<header class="nav"><a class="brand" href="#home" aria-label="TBA TE EDITZZZ home">TBA_TE_EDITZZZ <span>✦</span> OFFICIAL</a><a class="nav-link" href="#connect">CONNECT ↗</a></header>
+<main>
+<section class="hero" id="home"><div class="orbit" aria-hidden="true"></div>
+<div class="hero-content"><p class="eyebrow">A creator’s universe</p><h1>Welcome to<br><em>my world.</em></h1>
+<div style="display:flex;align-items:center;gap:1rem;margin-top:1.6rem"><img src="profile.jpg" alt="TBA_TE_EDITZZZ profile picture" width="84" height="84" style="width:84px;height:84px;object-fit:cover;object-position:center 35%;border-radius:50%;border:2px solid #bc7cff;box-shadow:0 0 24px #a343ff77;flex-shrink:0"><p class="creator" style="margin:0">TBA_TE_EDITZZZ</p></div>
+<p class="hero-sub">CONTENT CREATOR | DIGITAL CREATOR</p>
+<div class="creator-tools"><button class="tool-button" id="share-site" type="button">SHARE THIS PAGE ↗</button><button class="tool-button" id="replay-intro" type="button">REPLAY INTRO ▶</button></div>
+<p class="share-status" id="share-status" role="status" aria-live="polite"></p></div>
+<a href="#connect" class="scroll">SCROLL TO EXPLORE</a></section>
+<section class="connect" id="connect"><div class="reveal"><p class="section-kicker">Find me online</p><h2>Let’s create<br>something real.</h2><p class="lead">Follow the journey, discover new edits, and be part of the community.</p></div>
+<div class="cards">
+<article class="card reveal left"><div class="icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M7 2h10a5 5 0 0 1 5 5v10a5 5 0 0 1-5 5H7a5 5 0 0 1-5-5V7a5 5 0 0 1 5-5Zm0 2a3 3 0 0 0-3 3v10a3 3 0 0 0 3 3h10a3 3 0 0 0 3-3V7a3 3 0 0 0-3-3H7Zm5 3a5 5 0 1 1 0 10 5 5 0 0 1 0-10Zm0 2a3 3 0 1 0 0 6 3 3 0 0 0 0-6Zm5.5-3a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3Z"/></svg></div><p class="card-label">01 / INSTAGRAM</p><h3>FOLLOW ME ON INSTAGRAM</h3><p class="handle">@tba_te_editzzz</p><a class="cta" href="https://www.instagram.com/tba_te_editzzz/" target="_blank" rel="noopener noreferrer">FOLLOW <span aria-hidden="true">↗</span></a></article>
+<article class="card reveal right"><div class="icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M23 7.1a3 3 0 0 0-2.1-2.2C19 4.4 12 4.4 12 4.4s-7 0-8.9.5A3 3 0 0 0 1 7.1 31 31 0 0 0 .5 12a31 31 0 0 0 .5 4.9 3 3 0 0 0 2.1 2.2c1.9.5 8.9.5 8.9.5s7 0 8.9-.5a3 3 0 0 0 2.1-2.2 31 31 0 0 0 .5-4.9 31 31 0 0 0-.5-4.9ZM9.7 15.4V8.6l6 3.4-6 3.4Z"/></svg></div><p class="card-label">02 / YOUTUBE</p><h3>MY YOUTUBE CHANNEL</h3><p class="handle">@tba_te_editzzz</p><a class="cta" href="https://www.youtube.com/@tba_te_editzzz" target="_blank" rel="noopener noreferrer">SUBSCRIBE <span aria-hidden="true">↗</span></a></article>
+</div></section>
+<section class="creator-details reveal" aria-labelledby="explore-title"><p class="section-kicker">Create • Edit • Inspire</p><h2 id="explore-title">ENTER THE CREATIVE SPACE.</h2>
+<div class="detail-grid"><div class="detail-item"><span>01 / DISCOVER</span><strong>Watch the journey</strong>Explore the YouTube channel for videos and creative inspiration.</div><div class="detail-item"><span>02 / CONNECT</span><strong>Follow along</strong>Find TBA_TE_EDITZZZ on Instagram and stay connected.</div><div class="detail-item"><span>03 / CREATE</span><strong>Get inspired</strong>Use the AI chat for ideas, captions, and editing tips once it’s connected.</div></div></section>
+<section class="daily-quote reveal" aria-labelledby="daily-quote-label"><img class="quote-character" id="quote-character" alt="TBA_TE_EDITZZZ character artwork" width="74" height="74"><p class="section-kicker" id="daily-quote-label">A new line each day</p><blockquote id="daily-quote-text">“Every new scene begins with a first step.”</blockquote><p class="quote-note">✦ Original words • Inspired by anime</p></section>
+</main>
+<footer><strong>TBA_TE_EDITZZZ</strong><span>Made with creativity ✦</span></footer>
+</div>
+<script>
+(()=>{
+const $=id=>document.getElementById(id),reduced=matchMedia('(prefers-reduced-motion: reduce)'),fine=matchMedia('(hover:hover) and (pointer:fine)');
+
+/* Intro */
+const intro=$('intro'),skip=$('skip');let seen=false,timer;
+try{seen=sessionStorage.getItem('tba_intro_seen')==='1'}catch(e){}
+function finish(){clearTimeout(timer);try{sessionStorage.setItem('tba_intro_seen','1')}catch(e){}intro.classList.add('out');setTimeout(()=>{if(intro.classList.contains('out'))intro.hidden=true},750)}
+function play(){intro.hidden=false;intro.classList.remove('out');intro.querySelectorAll('.intro-line,.intro-title,.intro-sub').forEach(e=>{e.style.animation='none';void e.offsetWidth;e.style.animation=''});skip.addEventListener('click',finish,{once:true});clearTimeout(timer);timer=setTimeout(finish,3000)}
+if(seen||reduced.matches)intro.hidden=true;else play();
+
+/* Reveal on scroll */
+const items=document.querySelectorAll('.reveal');
+if('IntersectionObserver'in window&&!reduced.matches){const o=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visible');o.unobserve(e.target)}}),{threshold:.12});items.forEach(el=>o.observe(el))}
+else items.forEach(el=>el.classList.add('visible'));
+
+/* Cursor glow, star parallax, card light */
+if(!reduced.matches&&fine.matches){const c=$('cursor');addEventListener('pointermove',e=>{c.style.left=e.clientX+'px';c.style.top=e.clientY+'px'},{passive:true});
+document.querySelectorAll('.card').forEach(card=>card.addEventListener('pointermove',e=>{const r=card.getBoundingClientRect();card.style.setProperty('--light-x',(e.clientX-r.left)+'px');card.style.setProperty('--light-y',(e.clientY-r.top)+'px')},{passive:true}))}
+const stars=$('stars');let pending=false;
+
+/* Back to top + stars */
+const top=$('back-to-top');
+addEventListener('scroll',()=>{top.hidden=scrollY<500;if(!reduced.matches&&!pending){pending=true;requestAnimationFrame(()=>{stars.style.transform='translateY('+Math.min(scrollY*.06,60)+'px)';pending=false})}},{passive:true});
+top.hidden=scrollY<500;
+top.addEventListener('click',()=>scrollTo({top:0,behavior:reduced.matches?'auto':'smooth'}));
+
+/* Share + replay */
+const share=$('share-site'),status=$('share-status');
+share.addEventListener('click',async()=>{try{if(navigator.share){await navigator.share({title:document.title,url:location.href});return}
+if(navigator.clipboard&&isSecureContext){await navigator.clipboard.writeText(location.href);status.textContent='Link copied to clipboard.'}else status.textContent='Copy the address in your browser to share this page.'}
+catch(e){if(e.name!=='AbortError')status.textContent='Copy the address in your browser to share this page.'}});
+$('replay-intro').addEventListener('click',()=>{if(reduced.matches){status.textContent='Intro is disabled by your reduced-motion setting.';return}play()});
+
+/* Chat */
+const panel=$('chat-panel'),openBtn=$('chat-open'),closeBtn=$('chat-close'),form=$('chat-form'),input=$('chat-input'),messages=$('chat-messages'),model=$('chat-model');let history=[];
+const add=(text,who)=>{const el=document.createElement('div');el.className='chat-message '+who;el.textContent=text;messages.appendChild(el);messages.scrollTop=messages.scrollHeight};
+function setChat(on){panel.hidden=!on;openBtn.setAttribute('aria-expanded',on);document.body.style.overflow=on?'hidden':'';(on?input:openBtn).focus()}
+openBtn.addEventListener('click',()=>setChat(true));
+closeBtn.addEventListener('click',()=>setChat(false));
+addEventListener('keydown',e=>{if(e.key==='Escape'&&!panel.hidden)setChat(false)});
+$('clear-chat').addEventListener('click',()=>{history=[];messages.replaceChildren();add('Chat cleared. Ask me something new.','assistant')});
+document.querySelectorAll('.quick-prompts button').forEach(b=>b.addEventListener('click',()=>{input.value=b.dataset.prompt;input.focus()}));
+form.addEventListener('submit',async e=>{e.preventDefault();const text=input.value.trim();if(!text)return;input.value='';add(text,'user');
+const btn=form.querySelector('button');btn.disabled=true;
+const t=document.createElement('div');t.className='chat-message chat-thinking';t.textContent='Thinking';messages.appendChild(t);messages.scrollTop=messages.scrollHeight;
+try{const r=await fetch('/api/chat',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({provider:model.value,message:text,history:history.slice(-8)})});
+const d=await r.json();if(!r.ok)throw new Error(d.error||'Chat is unavailable.');
+add(d.reply,'assistant');history.push({role:'user',content:text},{role:'assistant',content:d.reply})}
+catch(err){add('Chat is not connected yet or is temporarily unavailable. The site owner needs to configure the AI server.','assistant')}
+finally{t.remove();btn.disabled=false;input.focus()}});
+
+/* Portraits + daily quote */
+const hero=document.querySelector('.hero-content img'),qc=$('quote-character');
+qc.src=hero.src;
+[hero,qc].forEach(i=>i.addEventListener('error',()=>{i.style.display='none'}));
+const lines=['Every new scene begins with a first step.','Your next chapter is yours to create.','Even the quietest spark can light the way.','Keep creating, even when the path is still unfolding.','Turn your setbacks into the start of a stronger story.','Small steps can lead to extraordinary worlds.','Find your rhythm, then make it your own.','The courage to begin is its own kind of power.','Let every edit bring your vision into focus.','You don’t need to see the ending to start your story.','Make today a scene worth remembering.','A little progress can change the whole story.','Your imagination is a world waiting to be explored.','Every frame is another chance to create something new.'];
+const d=new Date();let x=Math.floor(Date.UTC(d.getFullYear(),d.getMonth(),d.getDate())/86400000);
+x=Math.imul(x^(x>>>16),0x45d9f3b);x=Math.imul(x^(x>>>16),0x45d9f3b);x=(x^(x>>>16))>>>0;
+$('daily-quote-text').textContent='“'+lines[x%lines.length]+'”';
+})();
+</script>
+</body>
+</html>
